@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Song Info</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better aesthetics */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-200">
+        <h1 class="text-4xl font-extrabold text-green-600 mb-6 text-center">Spotify Song Info</h1>
+        <p class="text-gray-700 text-center mb-6">Enter a Spotify song URL to get its details.</p>
+
+        <div class="mb-6">
+            <label for="spotifyUrl" class="block text-gray-700 text-sm font-bold mb-2">Spotify Song URL:</label>
+            <input
+                type="text"
+                id="spotifyUrl"
+                placeholder="e.g., https://open.spotify.com/track/4bfK309Q78P4h56l6d2B8C"
+                class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
+            />
+        </div>
+
+        <button
+            id="getSongInfoBtn"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg w-full transition duration-300 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75"
+        >
+            Get Song Information
+        </button>
+
+        <div id="messageBox" class="mt-6 p-4 rounded-md text-sm hidden"></div>
+
+        <div id="songInfo" class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200 hidden">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Song Details:</h2>
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <img id="albumArt" src="" alt="Album Art" class="w-24 h-24 rounded-lg shadow-md object-cover">
+                <div>
+                    <p class="text-xl font-semibold text-gray-900 mb-1">Title: <span id="songTitle" class="font-normal"></span></p>
+                    <p class="text-lg text-gray-800 mb-1">Artist: <span id="songArtist" class="font-normal"></span></p>
+                    <p class="text-md text-gray-600">Album: <span id="songAlbum" class="font-normal"></span></p>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mt-4">
+                Note: Direct audio file downloads are not provided due to copyright restrictions. Please use official streaming platforms like Spotify, Apple Music, or purchase from legal music stores to support artists.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const spotifyUrlInput = document.getElementById('spotifyUrl');
+        const getSongInfoBtn = document.getElementById('getSongInfoBtn');
+        const messageBox = document.getElementById('messageBox');
+        const songInfoDiv = document.getElementById('songInfo');
+        const songTitleSpan = document.getElementById('songTitle');
+        const songArtistSpan = document.getElementById('songArtist');
+        const songAlbumSpan = document.getElementById('songAlbum');
+        const albumArtImg = document.getElementById('albumArt');
+
+        // Function to display messages
+        function showMessage(message, type = 'info') {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-red-100', 'border-red-400', 'text-red-700', 'bg-green-100', 'border-green-400', 'text-green-700', 'bg-blue-100', 'border-blue-400', 'text-blue-700');
+            messageBox.classList.add('block');
+
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'border-red-400', 'text-red-700');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+            } else { // info
+                messageBox.classList.add('bg-blue-100', 'border-blue-400', 'text-blue-700');
+            }
+        }
+
+        // Function to hide messages and song info
+        function hideResults() {
+            messageBox.classList.add('hidden');
+            songInfoDiv.classList.add('hidden');
+            songTitleSpan.textContent = '';
+            songArtistSpan.textContent = '';
+            songAlbumSpan.textContent = '';
+            albumArtImg.src = '';
+            albumArtImg.alt = 'Album Art';
+        }
+
+        // Event listener for the button click
+        getSongInfoBtn.addEventListener('click', async () => {
+            const spotifyUrl = spotifyUrlInput.value.trim();
+            hideResults(); // Clear previous results
+
+            if (!spotifyUrl) {
+                showMessage('Please enter a Spotify song URL.', 'error');
+                return;
+            }
+
+            // Regular expression to extract track ID from Spotify URL
+            const trackIdMatch = spotifyUrl.match(/spotify\.com\/track\/([a-zA-Z0-9]+)/);
+
+            if (!trackIdMatch || trackIdMatch.length < 2) {
+                showMessage('Invalid Spotify track URL. Please ensure it is a valid track link (e.g., https://open.spotify.com/track/...).', 'error');
+                return;
+            }
+
+            const trackId = trackIdMatch[1];
+            showMessage('Fetching song information...', 'info');
+            getSongInfoBtn.disabled = true; // Disable button during fetch
+
+            // RapidAPI configuration (replace with your actual RapidAPI Host and Key if you have one)
+            // For demonstration, these are placeholders. You would need a real RapidAPI account and a Spotify API subscription.
+            const RAPIDAPI_HOST = 'spotify23.p.rapidapi.com'; // Example host, find a suitable one on RapidAPI
+            const RAPIDAPI_KEY = ''; // Your RapidAPI Key (leave empty for Canvas runtime to provide if applicable)
+            const API_ENDPOINT = `https://${RAPIDAPI_HOST}/tracks/?ids=${trackId}`; // Example endpoint for multiple tracks
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Host': RAPIDAPI_HOST,
+                        'X-RapidAPI-Key': RAPIDAPI_KEY // Canvas will inject if empty string
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorData.message || 'Unknown error'}`);
+                }
+
+                const data = await response.json();
+
+                // Assuming the API returns a structure like { tracks: [{ name, artists, album, images }] }
+                // This structure depends on the specific RapidAPI you choose.
+                const track = data.tracks && data.tracks.length > 0 ? data.tracks[0] : null;
+
+                if (track) {
+                    songTitleSpan.textContent = track.name || 'N/A';
+                    songArtistSpan.textContent = track.artists && track.artists.length > 0 ? track.artists.map(a => a.name).join(', ') : 'N/A';
+                    songAlbumSpan.textContent = track.album ? track.album.name : 'N/A';
+
+                    // Find the largest album art image
+                    const albumImages = track.album && track.album.images ? track.album.images : [];
+                    const largestImage = albumImages.reduce((prev, current) => (prev.height > current.height ? prev : current), { height: 0 });
+
+                    if (largestImage.url) {
+                        albumArtImg.src = largestImage.url;
+                        albumArtImg.alt = `Album art for ${track.name}`;
+                    } else {
+                        // Placeholder image if no album art is found
+                        albumArtImg.src = 'https://placehold.co/96x96/cccccc/333333?text=No+Art';
+                        albumArtImg.alt = 'No album art available';
+                    }
+
+                    songInfoDiv.classList.remove('hidden');
+                    showMessage('Song information retrieved successfully!', 'success');
+                } else {
+                    showMessage('Could not find song information for the provided URL. Please check the URL and try again.', 'error');
+                }
+
+            } catch (error) {
+                console.error('Error fetching song info:', error);
+                showMessage(`Failed to retrieve song information: ${error.message}. Please ensure the URL is correct and your RapidAPI key/subscription is valid.`, 'error');
+                // Fallback for album art in case of error
+                albumArtImg.src = 'https://placehold.co/96x96/cccccc/333333?text=Error';
+                albumArtImg.alt = 'Error loading album art';
+            } finally {
+                getSongInfoBtn.disabled = false; // Re-enable button
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Ninjas Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #240D57;
+            --secondary: #501FC1;
+            --accent: #E87BF8;
+            --dark: #1E1E1E;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(224, 240, 253, 0.5) 100%);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .testimonial-card {
+            box-shadow: 0px 43px 80px rgba(36, 13, 87, 0.1);
+        }
+
+        .toggle-checkbox:checked {
+            right: 0;
+            background-color: var(--secondary);
+        }
+
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: rgba(80, 31, 193, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1372cd63-9cc3-472b-9789-099b5d561556.png" alt="Coding Ninjas logo in dark purple color with ninja illustration" class="h-10" />
+                <nav class="hidden md:flex ml-10 space-x-8">
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Courses</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Practice</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Events</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Blog</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Success Stories</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="hidden md:block text-primary font-medium px-4 py-2 rounded-md hover:bg-purple-50">My Classroom</button>
+                <button class="btn-primary text-white font-medium px-5 py-2 rounded-md">Login</button>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-16 pb-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-dark mb-6"><span class="text-primary">Learn Coding</span> from IIT & Stanford Alumni</h1>
+                <p class="text-lg text-gray-600 mb-8">India's best coding & data structures institute with 50,000+ students from 300+ colleges</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="btn-primary text-white font-medium px-8 py-3 rounded-md">View All Courses</button>
+                    <button class="border-2 border-primary text-primary font-medium px-8 py-3 rounded-md bg-white">Try Free Content</button>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5277ae6d-9890-4528-b448-31df1e42819f.png" alt="Happy students learning coding together in a modern classroom with laptops" class="rounded-lg shadow-xl" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-6">
+                    <h3 class="text-4xl font-bold text-primary">50,000+</h3>
+                    <p class="text-gray-600">Students</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-4xl font-bold text-primary">300+</h3>
+                    <p class="text-gray-600">Colleges</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-4xl font-bold text-primary">100+</h3>
+                    <p class="text-gray-600">Expert Mentors</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-4xl font-bold text-primary">4.8/5</h3>
+                    <p class="text-gray-600">Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Our Popular Courses</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Choose from beginner to advanced level courses with hands-on coding exercises</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course 1 -->
+                <div class="course-card bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0a021c21-07f3-4a06-8bfb-7e81facd6540.png" alt="Java programming course with laptop screen showing code" class="w-full" />
+                        <span class="absolute top-4 right-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">Bestseller</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-primary">Java Foundation</h3>
+                            <span class="text-xs bg-purple-100 text-primary px-2 py-1 rounded">Beginner</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Learn Core Java from scratch with hands-on coding exercises</p>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 ml-2 text-sm">4.5 (1.2k reviews)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-primary">₹5,999</span>
+                            <button class="btn-primary text-white text-sm font-medium px-4 py-2 rounded">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="course-card bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e982b312-1456-44af-84b8-8ffc9924e86e.png" alt="Data structures algorithms course with colorful visualizations" class="w-full" />
+                        <span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">New</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-primary">Data Structures & Algorithms</h3>
+                            <span class="text-xs bg-purple-100 text-primary px-2 py-1 rounded">Advanced</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Master DSA for interviews with 100+ problems and mentor support</p>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 ml-2 text-sm">4.9 (2.4k reviews)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-primary">₹9,999</span>
+                            <button class="btn-primary text-white text-sm font-medium px-4 py-2 rounded">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="course-card bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300">
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65c365ed-4831-4ac9-9308-e74cd77af0a3.png" alt="Full stack web development course showing HTML, CSS, and JavaScript" class="w-full" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-primary">Full Stack Web Dev</h3>
+                            <span class="text-xs bg-purple-100 text-primary px-2 py-1 rounded">Intermediate</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Build complete web apps with React, Node.js and MongoDB</p>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 ml-2 text-sm">4.6 (860 reviews)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-primary">₹12,999</span>
+                            <button class="btn-primary text-white text-sm font-medium px-4 py-2 rounded">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="border-2 border-primary text-primary font-medium px-8 py-3 rounded-md">View All Courses</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Why Coding Ninjas?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Our industry-vetted curriculum ensures you get the best learning experience</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-chalkboard-teacher text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Expert Mentors</h3>
+                    <p class="text-gray-600">Learn from IIT & Stanford alumni with 5+ years of industry experience</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-laptop-code text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Hands-on Coding</h3>
+                    <p class="text-gray-600">Practice with 1000+ problems and live projects with instant evaluation</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Career Support</h3>
+                    <p class="text-gray-600">Get interview preparation assistance and resume building workshops</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Success Stories</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">What our students say about their learning experience</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The DSA course completely transformed my problem-solving skills. I cracked interviews at Amazon and Google thanks to the structured curriculum and mentor guidance."</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f09ef258-3d18-4fd4-9a37-200ceadf6da4.png" alt="Smiling young professional in office attire" class="w-12 h-12 rounded-full mr-4" />
+                        <div>
+                            <h4 class="font-bold text-primary">Rahul Sharma</h4>
+                            <p class="text-sm text-gray-500">Placed at Amazon</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The Web Development bootcamp gave me all the practical skills I needed. I built my portfolio website during the course and landed my first freelance clients!"</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7a788ea0-fe59-4c9d-85a6-fc0d0aa77e35.png" alt="Young female developer working on laptop" class="w-12 h-12 rounded-full mr-4" />
+                        <div>
+                            <h4 class="font-bold text-primary">Priya Patel</h4>
+                            <p class="text-sm text-gray-500">Freelance Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"As a beginner, I was intimidated by coding but the Foundation course made it so approachable. The mentors were always available to clear my doubts."</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5c54340a-7337-4589-b30a-68774b772d90.png" alt="Student in casual attire smiling with laptop" class="w-12 h-12 rounded-full mr-4" />
+                        <div>
+                            <h4 class="font-bold text-primary">Amit Joshi</h4>
+                            <p class="text-sm text-gray-500">Student, IIT Delhi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to start your coding journey?</h2>
+            <p class="text-lg max-w-2xl mx-auto mb-8">Join India's most loved coding community and take the first step towards your dream tech career</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-white text-primary font-medium px-8 py-3 rounded-md">Explore Courses</button>
+                <button class="border-2 border-white text-white font-medium px-8 py-3 rounded-md">Talk to Counselor</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1 -->
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b6316514-135f-4d75-b661-45613edcffbd.png" alt="Coding Ninjas logo in white color with ninja illustration" class="h-10 mb-6" />
+                    <p class="text-gray-400 mb-4">India's best platform to prepare for coding interviews and learn programming.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Courses</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Data Structures</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Machine Learning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Competitive Programming</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Interview Preparation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Success Stories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Press</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3"></i>
+                            <span>Bangalore, Karnataka, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>hello@codingninjas.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 Coding Ninjas. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-50 hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b9d2f50a-b5b6-48bd-992c-355e1b78dfe2.png" alt="Coding Ninjas logo in dark purple color with ninja illustration" class="h-10" />
+                <button id="closeMenu" class="text-gray-600">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6">
+                <a href="#" class="nav-link text-2xl font-medium text-gray-700 hover:text-primary">Courses</a>
+                <a href="#" class="nav-link text-2xl font-medium text-gray-700 hover:text-primary">Practice</a>
+                <a href="#" class="nav-link text-2xl font-medium text-gray-700 hover:text-primary">Events</a>
+                <a href="#" class="nav-link text-2xl font-medium text-gray-700 hover:text-primary">Blog</a>
+                <a href="#" class="nav-link text-2xl font-medium text-gray-700 hover:text-primary">Success Stories</a>
+                <div class="pt-6">
+                    <button class="w-full btn-primary text-white font-medium px-5 py-3 rounded-md mb-4">Login</button>
+                    <button class="w-full border-2 border-primary text-primary font-medium px-5 py-3 rounded-md">My Classroom</button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.fa-bars').parentElement.addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.remove('hidden');
+        });
+
+        document.getElementById('closeMenu').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        });
+
+        // Course card hover effect
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add to cart animation
+        document.querySelectorAll('.btn-primary[data-course]').forEach(button => {
+            button.addEventListener('click', function() {
+                const courseName = this.getAttribute('data-course');
+                alert(`Added ${courseName} to your cart!`);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
